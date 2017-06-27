@@ -1,5 +1,6 @@
 package com.codepath.android.booksearch.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
+import com.codepath.android.booksearch.ItemClickSupport;
 import com.codepath.android.booksearch.R;
 import com.codepath.android.booksearch.adapters.BookAdapter;
 import com.codepath.android.booksearch.models.Book;
@@ -35,7 +39,6 @@ public class BookListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
-
         rvBooks = (RecyclerView) findViewById(R.id.rvBooks);
         abooks = new ArrayList<>();
 
@@ -47,6 +50,19 @@ public class BookListActivity extends AppCompatActivity {
 
         // Set layout manager to position the items
         rvBooks.setLayoutManager(new LinearLayoutManager(this));
+
+        ItemClickSupport.addTo(rvBooks).setOnItemClickListener(
+            new ItemClickSupport.OnItemClickListener() {
+                @Override
+                public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                    // do it
+                    Toast.makeText(BookListActivity.this, "success!", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(BookListActivity.this, BookDetailActivity.class);
+                    startActivity(i);
+                }
+            }
+        );
+
     }
 
     // Executes an API call to the OpenLibrary search endpoint, parses the results

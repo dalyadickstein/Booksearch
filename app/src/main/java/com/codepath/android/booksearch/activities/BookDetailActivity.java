@@ -28,11 +28,11 @@ public class BookDetailActivity extends AppCompatActivity {
         // Use book object to populate data into views
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_book_detail, menu);
+
         return true;
     }
 
